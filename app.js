@@ -24,9 +24,24 @@
 
 /*-------------------------------- Constants --------------------------------*/
 
+
 /*-------------------------------- Variables --------------------------------*/
 
+let firstOperand = 0;
+let secondOperand = 0;
+let operator = "";
+let result = 0;
+
+let displayStr = "";
+// will be written to the text content of the display div
+
+let step = "firstOperand";
+// the step of the equation
+// will be "firstOperand", "operator", "secondOperand", "result", or "clear"
+
 /*------------------------ Cached Element References ------------------------*/
+
+const displayObj = document.querySelector('.display');
 
 const buttons = document.querySelectorAll('.button'); // selects all the buttons
 // console.dir(buttons); // each one is a DIV...
@@ -41,11 +56,11 @@ buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
         // This log is for testing purposes to verify we're getting the correct value
         console.log(event.target.innerText);
+        console.log(event.target);
         // Future logic to capture the button's value would go here...
+
     });
 });
-
-
 
 
 
@@ -53,3 +68,20 @@ buttons.forEach((button) => {
 /*-------------------------------- Functions --------------------------------*/
 
 
+// when it's on the first operand step
+const firstOperandStep = () => {
+
+};
+
+
+// clear button functionality
+const clearButton = () => {
+    step = "firstOperand";
+    display = "";
+};
+
+const updateDisplay = () => {
+    displayObj.innerText = displayStr;
+}
+
+updateDisplay();
