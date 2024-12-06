@@ -22,6 +22,16 @@
 
 
 
+
+/*---------------- notes -----------------*/
+
+// I need to fucking whiteboard out this logic before cooking more function soup
+
+
+
+
+
+
 /*-------------------------------- Constants --------------------------------*/
 
 
@@ -39,28 +49,50 @@ let step = "firstOperand";
 // the step of the equation
 // will be "firstOperand", "operator", "secondOperand", "result", or "clear"
 
+let currentClick = "";
+// will be the button NAME having been clicked on.... ?
+// not currently in use 
+
+let clickType = "";
+// button TYPE clicked on
+// not currently in use
+
 /*------------------------ Cached Element References ------------------------*/
 
 const displayObj = document.querySelector('.display');
 
-const buttons = document.querySelectorAll('.button'); // selects all the buttons
+const buttons = document.querySelectorAll('.button');
+
+// selects all the buttons
 // console.dir(buttons); // each one is a DIV...
 // console.log(buttons); // it's an array?
 
 // const calculator = document.querySelector('#calculator');
 // Using querySelector and the existing calculator id, we can store a reference to our calculator.
 
+// const numberButtons = document.querySelectorAll('.number');
+// const operatorButtons = document.querySelectorAll('.operator');
+// const equalsButton = document.querySelectorAll('.equals');
+// const clarButton = document.querySelectorAll('.clear');
+
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
-        // This log is for testing purposes to verify we're getting the correct value
-        console.log(event.target.innerText);
-        console.log(event.target);
-        // Future logic to capture the button's value would go here...
-
+        // currentClick = event.target.innerText;
+        // clickType = event.target.classList[1]; // not a robust method
+        buttonClick(event.target.classList[1], event.target.innerText);
+        // console.log(event.target.className); // returns a string with both classes
+        // event.target.classList.contains('number');
     });
 });
+
+// numberButtons.forEach((button) => {
+//     button.addEventListener('click'), (event) => {
+//         displayObj.innerText = event.target.classList;
+//     }
+// });
 
 
 
@@ -68,20 +100,50 @@ buttons.forEach((button) => {
 /*-------------------------------- Functions --------------------------------*/
 
 
+const buttonClick = (clickType, currentClick) => {
+    displayObj.innerText = clickType + " " + currentClick;
+    switch (clickType) {
+        case 'number':
+            // number
+            break;
+        case 'operator':
+            operator = currentClick;
+            // advance step??????????????????????
+            break;
+        case 'clear':
+            //
+            break;
+        case 'equals':
+            //
+            break;
+        default:
+            // ERROR AF
+    }
+}
+
+
+
+
+
+
+
+
+
 // when it's on the first operand step
 const firstOperandStep = () => {
 
-};
+}
 
 
 // clear button functionality
 const clearButton = () => {
     step = "firstOperand";
     display = "";
-};
+}
 
 const updateDisplay = () => {
     displayObj.innerText = displayStr;
 }
 
-updateDisplay();
+// updateDisplay();
+
