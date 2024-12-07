@@ -34,20 +34,35 @@
 
 /*-------------------------------- Constants --------------------------------*/
 
+// step names - not necessary, but good for keeping track
+const steps = [
+    "readyForFirstOperand",
+    "readyForOperator",
+    "readyForSecondOperand",
+    "readyForEquals",
+    "displayingResult"
+]
+
+
 
 /*-------------------------------- Variables --------------------------------*/
 
+// equation variables
 let firstOperand = 0;
 let secondOperand = 0;
 let operator = "";
 let result = 0;
 
-let displayStr = "";
+// calculation variables
+let step = 0;
+let stepName = steps[step];
+
+
+
+// pretty sure this is unnecessary
+// let displayStr = "";
 // will be written to the text content of the display div
 
-let step = "firstOperand";
-// the step of the equation
-// will be "firstOperand", "operator", "secondOperand", "result", or "clear"
 
 let currentClick = "";
 // will be the button NAME having been clicked on.... ?
@@ -73,7 +88,7 @@ const buttons = document.querySelectorAll('.button');
 // const numberButtons = document.querySelectorAll('.number');
 // const operatorButtons = document.querySelectorAll('.operator');
 // const equalsButton = document.querySelectorAll('.equals');
-// const clarButton = document.querySelectorAll('.clear');
+// const clearButton = document.querySelectorAll('.clear');
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -100,6 +115,21 @@ buttons.forEach((button) => {
 /*-------------------------------- Functions --------------------------------*/
 
 
+// step change functions
+const advanceStep = () => {
+    step++;
+    stepName = steps[step];
+    console.log(stepName);
+}
+
+// clearrrrrrrr
+// activate this whenever the clear button is pressed
+const clearFunction = () => {
+    step = 0;
+    stepName = steps[step];
+    displayObj.innerText = "";
+}
+
 const buttonClick = (clickType, currentClick) => {
     displayObj.innerText = clickType + " " + currentClick;
     switch (clickType) {
@@ -110,23 +140,14 @@ const buttonClick = (clickType, currentClick) => {
             operator = currentClick;
             // advance step??????????????????????
             break;
-        case 'clear':
-            //
-            break;
         case 'equals':
             //
             break;
         default:
+            console.log("invalid click type. How?")
             // ERROR AF
     }
 }
-
-
-
-
-
-
-
 
 
 // when it's on the first operand step
@@ -135,15 +156,11 @@ const firstOperandStep = () => {
 }
 
 
-// clear button functionality
-const clearButton = () => {
-    step = "firstOperand";
-    display = "";
-}
 
-const updateDisplay = () => {
-    displayObj.innerText = displayStr;
-}
 
+// pretty sure this is going to be unnecessary
+// const updateDisplay = () => {
+//     displayObj.innerText = displayStr;
+// }
 // updateDisplay();
 
