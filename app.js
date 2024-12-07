@@ -10,31 +10,21 @@
 // see the output of the mathematical operation.
 // clear all operations and start from 0.
 
-/*--------------- questions -------------*/
 
+/*--------------- questions -------------*/
 
 // How do we capture the “value” when a number button is clicked?
 // What steps are needed to achieve this?
 // Can we use existing attributes to tie events to our number button elements?
 
 
-
-
-
-
-
 /*---------------- notes -----------------*/
-
-// I need to fucking whiteboard out this logic before cooking more function soup
-
-
-
 
 
 
 /*-------------------------------- Constants --------------------------------*/
 
-// step names - not necessary, but good for keeping track
+// step names - not necessary, but nice for keeping track
 const steps = [
     "ready for first operand",
     "ready for operator",
@@ -42,8 +32,6 @@ const steps = [
     "ready for equals",
     "displaying result"
 ]
-
-
 
 /*-------------------------------- Variables --------------------------------*/
 
@@ -57,63 +45,21 @@ let result = 0;
 let step = 0;
 let stepName = steps[step];
 
-
-
-// pretty sure this is unnecessary
-// let displayStr = "";
-// will be written to the text content of the display div
-
-
-let currentClick = "";
-// will be the button NAME having been clicked on.... ?
-// not currently in use 
-
-let clickType = "";
-// button TYPE clicked on
-// not currently in use
-
 /*------------------------ Cached Element References ------------------------*/
 
 const displayObj = document.querySelector('.display');
-
 const buttons = document.querySelectorAll('.button');
-
-// selects all the buttons
-// console.dir(buttons); // each one is a DIV...
-// console.log(buttons); // it's an array?
-
-// const calculator = document.querySelector('#calculator');
-// Using querySelector and the existing calculator id, we can store a reference to our calculator.
-
-// const numberButtons = document.querySelectorAll('.number');
-// const operatorButtons = document.querySelectorAll('.operator');
-// const equalsButton = document.querySelectorAll('.equals');
-// const clearButton = document.querySelectorAll('.clear');
-
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
-        // currentClick = event.target.innerText;
         // clickType = event.target.classList[1]; // not a robust method
         buttonClick(event.target.classList[1], event.target.innerText);
-        // console.log(event.target.className); // returns a string with both classes
-        // event.target.classList.contains('number');
     });
 });
 
-// numberButtons.forEach((button) => {
-//     button.addEventListener('click'), (event) => {
-//         displayObj.innerText = event.target.classList;
-//     }
-// });
-
-
-
-
 /*-------------------------------- Functions --------------------------------*/
-
 
 // step change function
 const advanceStep = () => {
@@ -121,19 +67,16 @@ const advanceStep = () => {
     stepNamer();
 }
 
-
-
 // updates and prints the step name to the console
 const stepNamer = () => {
     stepName = steps[step];
     console.log(`calculator is now ${stepName}`);
 }
 
-
-
 const buttonClick = (clickType, currentClick) => {
-    // displayObj.innerText = clickType + " " + currentClick;
-
+    // troubleshooting before other functions are built
+        // displayObj.innerText = clickType + " " + currentClick;
+    
     // check for and execute clearFunction
     if (currentClick === "C") {
         clearFunction();
