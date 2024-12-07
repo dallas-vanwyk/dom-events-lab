@@ -26,10 +26,10 @@
 
 // step names - not necessary, but nice for keeping track
 const steps = [
-    "ready for first operand",
-    "ready for operator",
-    "ready for second operand",
-    "ready for equals",
+    "awaiting first operand",
+    "awaiting operator",
+    "awaiting second operand",
+    "awaiting equals",
     "displaying result"
 ]
 
@@ -82,7 +82,7 @@ const buttonClick = (clickType, currentClick) => {
         clearFunction();
     } else if (step === 0 && clickType === "number") {
         firstOperandStep(currentClick);
-    } else if (step === 1 && clickType === "operator") {
+    } else if ((step === 1 || step === 2) && clickType === "operator") {
         operatorStep(currentClick);
     } else if (step === 2 && clickType === "number") {
         secondOperandStep(currentClick);
@@ -107,7 +107,7 @@ const clearFunction = () => {
 
 // function for first operand step
 const firstOperandStep = (numberInput) => {
-    firstOperand = numberInput;
+    firstOperand = parseInt(numberInput);
     displayObj.innerText = firstOperand;
     console.log(`first operand is ${firstOperand}`);
     advanceStep();
@@ -115,7 +115,7 @@ const firstOperandStep = (numberInput) => {
 
 // function for second operand step
 const secondOperandStep = (numberInput) => {
-    secondOperand = numberInput;
+    secondOperand = parseInt(numberInput);
     displayObj.innerText = secondOperand;
     console.log(`second operand is ${secondOperand}`);
     advanceStep();
@@ -126,7 +126,9 @@ const operatorStep = (operatorInput) => {
     operator = operatorInput;
     displayObj.innerText = operator;
     console.log(`operator is ${operator}`);
-    advanceStep();
+    // advanceStep();
+    step = 2;
+    stepNamer();
 }
 
 const equalsStep = () => {
