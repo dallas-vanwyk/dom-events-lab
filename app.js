@@ -36,11 +36,11 @@
 
 // step names - not necessary, but good for keeping track
 const steps = [
-    "readyForFirstOperand",
-    "readyForOperator",
-    "readyForSecondOperand",
-    "readyForEquals",
-    "displayingResult"
+    "ready for first operand",
+    "ready for operator",
+    "ready for second operand",
+    "ready for equals",
+    "displaying result"
 ]
 
 
@@ -115,52 +115,78 @@ buttons.forEach((button) => {
 /*-------------------------------- Functions --------------------------------*/
 
 
-// step change functions
+// step change function
 const advanceStep = () => {
     step++;
-    stepName = steps[step];
-    console.log(stepName);
+    stepNamer();
 }
 
-// clearrrrrrrr
-// activate this whenever the clear button is pressed
-const clearFunction = () => {
-    step = 0;
+
+
+// updates and prints the step name to the console
+const stepNamer = () => {
     stepName = steps[step];
-    displayObj.innerText = "";
+    console.log(`calculator is now ${stepName}`);    
 }
+
+
 
 const buttonClick = (clickType, currentClick) => {
     displayObj.innerText = clickType + " " + currentClick;
-    switch (clickType) {
-        case 'number':
-            // number
-            break;
-        case 'operator':
-            operator = currentClick;
-            // advance step??????????????????????
-            break;
-        case 'equals':
-            //
-            break;
-        default:
-            console.log("invalid click type. How?")
-            // ERROR AF
+
+    // check for and execute clearFunction
+    if (currentClick === "C") {
+        clearFunction();
+    } else if (step === 0 && clickType === "number") {
+        firstOperandStep(currentClick);
+    } else if (step === 1 && clickType === "operator") {
+        // receiving the operator
+        advanceStep();
+    } else if (step === 2 && clickType === "number") {
+        secondOperandStep(currentClick);
+    } else if (step === 3 && clickType === "equals") {
+        // execute equals
+        advanceStep();
+    } else {
+        console.log(`${clickType} button ${currentClick} was pressed, but calculator is currently ${stepName}.`)
     }
 }
 
 
-// when it's on the first operand step
-const firstOperandStep = () => {
+// function for first operand step
+const firstOperandStep = (numberInput) => {
+    firstOperand = numberInput;
+    console.log(`first operand is ${firstOperand}`);
+    advanceStep();
+}
 
+// function for second operand step
+const secondOperandStep = (numberInput) => {
+    secondOperand = numberInput;
+    console.log(`second operand is ${secondOperand}`);
+    advanceStep();
+}
+
+// function for operator step
+const operatorStep = (operatorInput) {
+    operator = operatorInput;
+    console.log(`operator is ${operator}`);
+    advanceStep();
+}
+
+// clear button function
+const clearFunction = () => {
+    console.log(`clear button was pressed`);
+    step = 0;
+    stepNamer();
+    displayObj.innerText = "";
+    firstOperand = 0;
+    secondOperand = 0;
+    operator = "";
+    result = 0;
 }
 
 
 
 
-// pretty sure this is going to be unnecessary
-// const updateDisplay = () => {
-//     displayObj.innerText = displayStr;
-// }
-// updateDisplay();
 
