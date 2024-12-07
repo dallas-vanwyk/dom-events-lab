@@ -126,13 +126,13 @@ const advanceStep = () => {
 // updates and prints the step name to the console
 const stepNamer = () => {
     stepName = steps[step];
-    console.log(`calculator is now ${stepName}`);    
+    console.log(`calculator is now ${stepName}`);
 }
 
 
 
 const buttonClick = (clickType, currentClick) => {
-    displayObj.innerText = clickType + " " + currentClick;
+    // displayObj.innerText = clickType + " " + currentClick;
 
     // check for and execute clearFunction
     if (currentClick === "C") {
@@ -140,38 +140,14 @@ const buttonClick = (clickType, currentClick) => {
     } else if (step === 0 && clickType === "number") {
         firstOperandStep(currentClick);
     } else if (step === 1 && clickType === "operator") {
-        // receiving the operator
-        advanceStep();
+        operatorStep(currentClick);
     } else if (step === 2 && clickType === "number") {
         secondOperandStep(currentClick);
     } else if (step === 3 && clickType === "equals") {
-        // execute equals
-        advanceStep();
+        equalsStep();
     } else {
         console.log(`${clickType} button ${currentClick} was pressed, but calculator is currently ${stepName}.`)
     }
-}
-
-
-// function for first operand step
-const firstOperandStep = (numberInput) => {
-    firstOperand = numberInput;
-    console.log(`first operand is ${firstOperand}`);
-    advanceStep();
-}
-
-// function for second operand step
-const secondOperandStep = (numberInput) => {
-    secondOperand = numberInput;
-    console.log(`second operand is ${secondOperand}`);
-    advanceStep();
-}
-
-// function for operator step
-const operatorStep = (operatorInput) {
-    operator = operatorInput;
-    console.log(`operator is ${operator}`);
-    advanceStep();
 }
 
 // clear button function
@@ -186,6 +162,52 @@ const clearFunction = () => {
     result = 0;
 }
 
+// function for first operand step
+const firstOperandStep = (numberInput) => {
+    firstOperand = numberInput;
+    displayObj.innerText = firstOperand;
+    console.log(`first operand is ${firstOperand}`);
+    advanceStep();
+}
+
+// function for second operand step
+const secondOperandStep = (numberInput) => {
+    secondOperand = numberInput;
+    displayObj.innerText = secondOperand;
+    console.log(`second operand is ${secondOperand}`);
+    advanceStep();
+}
+
+// function for operator step
+const operatorStep = (operatorInput) => {
+    operator = operatorInput;
+    displayObj.innerText = operator;
+    console.log(`operator is ${operator}`);
+    advanceStep();
+}
+
+const equalsStep = () => {
+    switch (operator) {
+        case '+':
+            result = firstOperand + secondOperand;
+            break;
+        case '-':
+            result = firstOperand - secondOperand;
+            break;
+        case '/':
+            result = firstOperand / secondOperand;
+            break;
+        case '*':
+            result = firstOperand * secondOperand;
+            break;
+        default:
+            console.log(`error, operator ${operator}`);
+    }
+    // could probably round the result to a couple decimal places
+    displayObj.innerText = result;
+    console.log(`${firstOperand} ${operator} ${secondOperand} = ${result}`);
+    advanceStep();
+}
 
 
 
